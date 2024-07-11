@@ -1,3 +1,5 @@
+//Number Guessing Game!
+
 package Task1;
 
 import java.util.Scanner;
@@ -11,8 +13,11 @@ public class Task1 {
     private static final int maxAttempts = 10;
     static int attempts = 0;
     
+    //main method
     public static void main(String[] args) {
-        Scanner scanObj = new Scanner(System.in);
+        
+    	//Creating objects
+    	Scanner scanObj = new Scanner(System.in);
         Random rand = new Random();
         
         boolean play_again = true;
@@ -22,6 +27,7 @@ public class Task1 {
         System.out.println("Welcome to the Number Guessing Game!");
         System.out.println("Generated numbers are within " + minRange + " to " + maxRange);
 
+        //creating loop for play game to play again....
         do {
             round++;
             attempts = 0;
@@ -46,6 +52,10 @@ public class Task1 {
     }
 
     //Method to get level choice
+    /*
+     * This method is created to choose type of level = 'Easy' and 'Hard'.
+     * Used conditions to choose valid levels. 
+     */
     private static String getLevelChoice(Scanner scanObj) {
         while (true) {
             System.out.print("Choose a level (Easy or Hard): ");
@@ -61,6 +71,11 @@ public class Task1 {
 
     
     //Method to play Easy level
+    /*
+     * This method playEasyLevel is designed for a number-guessing game at the "easy" level,
+     * where the player has unlimited attempts to guess a randomly generated number.
+     * This method return number of attempts.
+     */
     private static int playEasyLevel(Random rand, Scanner scanObj, int attempts, boolean win, int round) {
         int generatedNumber = rand.nextInt(maxRange - minRange + 1) + minRange;
         System.out.println("You chose the easy level. You have unlimited chances to play.");
@@ -93,6 +108,12 @@ public class Task1 {
     }
 
     //Method to play Hard level
+    /*
+     * This method playHardLevel is designed for a number-guessing game at the "hard" level,
+     * where the player has limited attempts (10 attempts) to guess a randomly generated number.
+     * If in 10 attempts user doesn't guess original generated number then user will loose the game.
+     * This method return number of attempts.
+     */
     private static int playHardLevel(Random rand, Scanner scanObj, int attempts, boolean win, int round) {
         int generatedNumber = rand.nextInt(maxRange - minRange + 1) + minRange;
         System.out.println("You chose the hard level. You have " + maxAttempts + " attempts to play.");
