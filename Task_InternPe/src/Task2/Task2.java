@@ -22,28 +22,27 @@ public class Task2 {
 		int user_score = 0;
 		int pc_score = 0;
 		int pc_choice_number;
-		int round = 0;
+		int round = 1;
 		
 		System.out.println("\t\t\tWelcome to Rock Paper Scissor Game\n");
 		System.out.println("You have 5 rounds");
 		
-		while(round<5) {
+		while(round<=5) {
 			pc_choice_number = rd.nextInt(3);
 			pc_choice = choices[pc_choice_number];
 			
-			System.out.println("\nReady to play. This is round " + ++round);
+			System.out.println("\nReady to play. This is round " + round);
 			
+			System.out.println("To exit the game, type - 'exit'");
 			System.out.print("Enter your move(rock, paper, scissor): ");
 			user_choice = sc.nextLine().toLowerCase();
 			
+			if (user_choice.equals("exit")) {
+				break;
+			}
+			
 			if(!user_choice.equals(choices[0]) && !user_choice.equals(choices[1]) && !user_choice.equals(choices[2])) {
 				System.out.println("Invalid move! Please try again.");
-				System.out.println("To exit the game, type - 'exit'");
-				user_choice = sc.nextLine().toLowerCase();
-				if (user_choice.equals("exit")) {
-					break;
-				}
-					
 				continue;
 			}
 			
@@ -60,6 +59,7 @@ public class Task2 {
 				pc_score++;
 				System.out.println("Computer win this round.");
 			}
+			round++;
 		}
 		
 		if(user_choice.equals("exit")) {
@@ -78,6 +78,8 @@ public class Task2 {
 				System.out.println("Your score: " + user_score + " and Computer score: " + pc_score);
 			}	
 		}
+		
+		sc.close();
 	}
 
 }
