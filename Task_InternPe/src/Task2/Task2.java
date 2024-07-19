@@ -5,30 +5,34 @@
 package Task2;
 
 import java.util.Scanner;
-import java.util.InputMismatchException;
 import java.util.Random;
 
 public class Task2 {
 
 	public static void main(String[] args) {
 		
-		//Creating objects
-		Scanner sc = new Scanner(System.in);
-		Random rd = new Random();
+		boolean play_again = true;
 		
-		//Variables
-		String[] choices = {"rock","paper","scissors"}; 
-		String pc_choice = "";
-		String user_choice = "";
-		int user_score = 0;
-		int pc_score = 0;
-		int pc_choice_number;
-		int round = 1;
-		
-		System.out.println("\t\t\tWelcome to Rock Paper Scissor Game\n");
-		System.out.println("You have 5 rounds");
-		
-		try {
+		do {
+			//Creating objects
+			Scanner sc = new Scanner(System.in);
+			Random rd = new Random();
+			
+			//Variables
+			String[] choices = {"rock","paper","scissors"}; 
+			String pc_choice = "";
+			String user_choice = "";
+			String ans = "";
+			int user_score = 0;
+			int pc_score = 0;
+			int pc_choice_number;
+			int round = 1;
+			
+			System.out.println("\t\t\tWelcome to Rock Paper Scissor Game\n");
+			System.out.println("You have 5 rounds");
+
+			//Created loop to play game and shows result as who wins the round 
+			//also counts the scores of user and pc 
 			while(round<=5) {
 				pc_choice_number = rd.nextInt(3);
 				pc_choice = choices[pc_choice_number];
@@ -63,20 +67,19 @@ public class Task2 {
 				}
 				round++;
 			}
-		}
-		catch(InputMismatchException e) {
-			System.out.println("Invalid input");
-		}
-		finally {
+
+			//Added conditions to show result of game 
 			if(user_choice.equals("exit")) {
-				System.out.println("Thanks for playing");
+				if (round<5) {
+					System.out.println("\nYou played " + round + " rounds.");
+				}
 			}
 			else {
 				if(user_score==pc_score) {
-					System.out.println("This game is tied, you both scored: " + pc_score);
+					System.out.println("\nThis game is tied, you both scored: " + pc_score);
 				}
 				else if (user_score>pc_score) {
-					System.out.println("Congratulations! you win this game");
+					System.out.println("\nCongratulations! you win this game");
 					System.out.println("Your score: " + user_score + " and Computer score: " + pc_score);
 				}
 				else {
@@ -85,9 +88,22 @@ public class Task2 {
 				}	
 			}
 			
-			sc.close();
+			System.out.print("Do you want to play again? (Yes/No): ");
+			ans = sc.nextLine().toLowerCase();
 			
-		}
+			if (ans.equals("no")) {
+				play_again = false;
+				System.out.println("Thanks for playing");
+			}
+			else if(ans.equals("yes")) {
+				play_again = true;
+			}
+			else {
+				System.out.print("Please enter - (Yes/No): ");
+				ans = sc.nextLine().toLowerCase();
+			}
+			
+			sc.close();
+		}while(play_again);
 	}
-
 }
