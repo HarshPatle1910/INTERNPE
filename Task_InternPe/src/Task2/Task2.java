@@ -10,13 +10,13 @@ import java.util.Random;
 public class Task2 {
 
 	public static void main(String[] args) {
+		//Creating objects
+		Scanner sc = new Scanner(System.in);
+		Random rd = new Random();
 		
 		boolean play_again = true;
 		
 		do {
-			//Creating objects
-			Scanner sc = new Scanner(System.in);
-			Random rd = new Random();
 			
 			//Variables
 			String[] choices = {"rock","paper","scissors"}; 
@@ -95,15 +95,7 @@ public class Task2 {
 				play_again = false;
 				System.out.println("Thanks for playing");
 			}
-			else if(ans.equals("yes")) {
-				play_again = true;
-			}
-			else {
-				System.out.print("Please enter - (Yes/No): ");
-				ans = sc.nextLine().toLowerCase();
-			}
-			
-			sc.close();
 		}while(play_again);
+		sc.close();
 	}
 }
