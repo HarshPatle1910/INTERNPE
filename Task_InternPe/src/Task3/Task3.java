@@ -1,6 +1,7 @@
 package Task3;
 
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class Task3 {
 
@@ -75,25 +76,30 @@ public class Task3 {
             printBoard();
             System.out.println("Player " + currentPlayer + "'s turn.");
             System.out.print("\tEnter row (1-3): ");
-            int row = sc.nextInt() - 1;
-            System.out.print("\tEnter column (1-3): ");
-            int col = sc.nextInt() - 1;
+            try {
+                int row = sc.nextInt() - 1;
+                System.out.print("\tEnter column (1-3): ");
+                int col = sc.nextInt() - 1;
 
-            if (isValidMove(row, col)) {
-                makeMove(row, col);
-                if (isWinner()) {
-                    printBoard();
-                    System.out.println("Player " + currentPlayer + " wins!");
-                    break;
+                if (isValidMove(row, col)) {
+                    makeMove(row, col);
+                    if (isWinner()) {
+                        printBoard();
+                        System.out.println("Player " + currentPlayer + " wins!");
+                        break;
+                    }
+                    if (isDraw()) {
+                        printBoard();
+                        System.out.println("It's a draw!");
+                        break;
+                    }
+                    currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
+                } else {
+                    System.out.println("Invalid move. Try again.");
                 }
-                if (isDraw()) {
-                    printBoard();
-                    System.out.println("It's a draw!");
-                    break;
-                }
-                currentPlayer = (currentPlayer == 'X') ? 'O' : 'X';
-            } else {
-                System.out.println("Invalid move. Try again.");
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number between 1 and 3.");
+                sc.next(); // Consume the invalid input
             }
         }
         System.out.println("Thanks to play!");
